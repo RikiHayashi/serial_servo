@@ -93,14 +93,6 @@ namespace Futaba {
 				std::this_thread::sleep_for(std::chrono::microseconds(t));
 			}
 
-			void set_angle_wait_until(unsigned char id, double angle, double diff = 0.1) {
-				set_angle(id, angle, 0.0);
-				servo_usleep(250);
-				while (abs(angle - (get_angle(id) / 100.0)) > diff) {
-					servo_usleep(250);
-				}
-			}
-
 		private:
 			boost::asio::io_service io_srv_;
 			boost::asio::serial_port serial_port_;
