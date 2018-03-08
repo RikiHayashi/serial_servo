@@ -1,6 +1,6 @@
 #include"Servo.h"
 
-void FutabaLeg::init_leg(){
+void FutabaLeg::init(){
 	for(int id=1; id<12; id++){
 		futaba.set_angle(id, 0.0+offset[id-1], 300);
 		futaba.servo_usleep(100);
@@ -8,7 +8,7 @@ void FutabaLeg::init_leg(){
 	futaba.servo_sleep(3000);
 }
 
-void FutabaLeg::ready_leg(vector<int> angle){
+void FutabaLeg::ready(vector<double> angle){
 	for(int id=1; id<12; id++){
 		futaba.set_angle(id, angle[ID[id]]*var[ID[id]]*0.01+offset[id-1], 300);
 		futaba.servo_usleep(100);
@@ -17,7 +17,7 @@ void FutabaLeg::ready_leg(vector<int> angle){
 }
 
 /* angle:deg, time:ms*/
-void FutabaLeg::move_leg(vector<int> angle, double time){
+void FutabaLeg::move(vector<double> angle, double time){
 	for(int id=1; id<12; id++){
 
 		futaba.set_angle(id,angle[ID[id]]*var[ID[id]]*0.01+offset[id-1], time);

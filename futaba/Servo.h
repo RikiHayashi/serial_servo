@@ -21,12 +21,12 @@ class FutabaLeg {
 			}
 			cout << "set Normal" << endl;
 			futaba.servo_sleep(1);
-			init_leg();
+			init();
 		}
 
-		void init_leg();
-		void ready_leg(vector<int> angle);
-		void move_leg(vector<int> angle, double time);
+		void init();
+		void ready(vector<double> angle);
+		void move(vector<double> angle, double time);
 		int offset_load(char *filename);
 
 		Futaba::Futaba futaba;
