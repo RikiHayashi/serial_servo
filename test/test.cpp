@@ -8,8 +8,6 @@
 #include <boost/date_time/posix_time/posix_time.hpp>
 
 using namespace std;
-boost::asio::io_service io_srv;
-boost::asio::serial_port port(io_srv);
 
 class ServoTest{
 	public:
@@ -23,9 +21,12 @@ class ServoTest{
 		ServoTest();
 		void ConnectServo();
 		void Command();
+	private:
+		boost::asio::io_service io_srv;
+		boost::asio::serial_port port;
 };
 
-ServoTest::ServoTest()
+ServoTest::ServoTest() : port(io_srv)
 {
 	ID = 0x00;
 	angle = 0.0;
