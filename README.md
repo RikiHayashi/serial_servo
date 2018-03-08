@@ -9,18 +9,18 @@
  boostのインストール
  ### Futaba
  ```bash
-   $ sudo modprobe ftdi-sio
-   $ sudo chmod 777 /sys/bus/usb-serial/drivers/ftdi_sio/new_id
-   $ sudo echo "1115 0008" > /sys/bus/usb-serial/drivers/ftdi_sio/new_id
-   $ sudo chmod +x /dev/ttyUSB0
+  $ sudo modprobe ftdi-sio  
+  $ sudo chmod 777 /sys/bus/usb-serial/drivers/ftdi_sio/new_id
+  $ sudo echo "1115 0008" > /sys/bus/usb-serial/drivers/ftdi_sio/new_id
+  $ sudo chmod +x /dev/ttyUSB0
  ```
  ### KondoB3M
  ```
-   $ sudo su
-   $ modprobe ftdi-sio
-   $ echo 165C 0009 > /sys/bus/usb-serial/drivers/ftdi_sio/new_id
-   $ exit
-```
+  $ sudo su
+  $ modprobe ftdi-sio
+  $ echo 165C 0009 > /sys/bus/usb-serial/drivers/ftdi_sio/new_id
+  $ exit
+ ```
  ### test
  ```
   $ cd serial_servo/test  
