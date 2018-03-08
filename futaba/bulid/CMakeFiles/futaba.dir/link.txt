@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/futaba.dir/main.cpp.o CMakeFiles/futaba.dir/Servo.cpp.o  -o futaba -rdynamic -lboost_system -lpthread 

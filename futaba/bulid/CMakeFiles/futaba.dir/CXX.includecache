@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/hr/github/serial_servo/futaba/Futaba.h
+array
+-
+numeric
+-
+chrono
+-
+thread
+-
+boost/asio.hpp
+-
+boost/thread.hpp
+-
+boost/date_time/posix_time/posix_time.hpp
+-
+
+/home/hr/github/serial_servo/futaba/Servo.cpp
+Servo.h
+/home/hr/github/serial_servo/futaba/Servo.h
+
+/home/hr/github/serial_servo/futaba/Servo.h
+vector
+/home/hr/github/serial_servo/futaba/vector
+Futaba.h
+/home/hr/github/serial_servo/futaba/Futaba.h
+
+/home/hr/github/serial_servo/futaba/main.cpp
+Servo.h
+/home/hr/github/serial_servo/futaba/Servo.h
+
