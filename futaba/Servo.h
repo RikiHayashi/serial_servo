@@ -10,7 +10,7 @@ using namespace std;
 class FutabaLeg {
 	public:
 		FutabaLeg() : futaba("/dev/ttyUSB0"){
-			offset_load((char *)"offset_angle.txt");
+			offset_load((char *)"offset.txt");
 			for(int id=1; id<12; id++){
 				futaba.set_mode(id, Futaba::MODE::Free);
 			}

@@ -1,5 +1,7 @@
 #include <array>
 #include <numeric>
+#include <chrono>
+#include <thread>
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
@@ -40,26 +42,27 @@ class B3M {
     buffer[7] = static_cast<unsigned char>(
         std::accumulate(buffer.begin(), buffer.end() - 1, 0) & 0xFF);
     serial_port_.write_some(boost::asio::buffer(buffer, buffer.size()));
-    boost::this_thread::sleep(boost::posix_time::microseconds(250));
+	std::this_thread::sleep_for(std::chrono::microseconds(250));
     std::vector<unsigned char> readbuf(256);
     serial_port_.read_some(boost::asio::buffer(readbuf, readbuf.size()));
   }
 
-  void set_angle(unsigned char id, double angle) {
+  void set_angle(unsigned char id, double angle, double time) {
     int pos = angle * 100;
+	int dt = time;
     std::array<unsigned char, 9> buffer;
     buffer[0] = static_cast<unsigned char>(0x09);
-    buffer[1] = static_cast<unsigned char>(0x04);
+    buffer[1] = static_cast<unsigned char>(0x06);
     buffer[2] = static_cast<unsigned char>(0x00);
     buffer[3] = static_cast<unsigned char>(id);
     buffer[4] = static_cast<unsigned char>(pos & 0xFF);
     buffer[5] = static_cast<unsigned char>((pos & 0xFF00) >> 8);
-    buffer[6] = static_cast<unsigned char>(0x2A);
-    buffer[7] = static_cast<unsigned char>(0x01);
+    buffer[6] = static_cast<unsigned char>(dt & 0xFF);
+    buffer[7] = static_cast<unsigned char>((dt & 0xFF00) >> 8);
     buffer[8] = static_cast<unsigned char>(
         std::accumulate(buffer.begin(), buffer.end() - 1, 0) & 0xFF);
     serial_port_.write_some(boost::asio::buffer(buffer, buffer.size()));
-    boost::this_thread::sleep(boost::posix_time::microseconds(250));
+	std::this_thread::sleep_for(std::chrono::microseconds(250));
     std::vector<unsigned char> readbuf(256);
     serial_port_.read_some(boost::asio::buffer(readbuf, readbuf.size()));
   }
@@ -75,22 +78,22 @@ class B3M {
     buffer[6] = static_cast<unsigned char>(
         std::accumulate(buffer.begin(), buffer.end() - 1, 0) & 0xFF);
     serial_port_.write_some(boost::asio::buffer(buffer, buffer.size()));
-    boost::this_thread::sleep(boost::posix_time::microseconds(250));
+	std::this_thread::sleep_for(std::chrono::microseconds(250));
     std::vector<unsigned char> readbuf(7);
     serial_port_.read_some(boost::asio::buffer(readbuf, readbuf.size()));
     return (readbuf[5] << 8) + readbuf[4];
   }
 
   void servo_sleep(int t) {
-    boost::this_thread::sleep(boost::posix_time::milliseconds(t));
+	std::this_thread::sleep_for(std::chrono::milliseconds(t));
   }
 
   void servo_usleep(int t) {
-    boost::this_thread::sleep(boost::posix_time::microseconds(t));
+	std::this_thread::sleep_for(std::chrono::microseconds(t));
   }
 
   void set_angle_wait_until(unsigned char id, double angle, double diff = 0.1) {
-    set_angle(id, angle);
+    set_angle(id, angle, 250);
     servo_usleep(250);
     while (abs(angle - (get_angle(id) / 100.0)) > diff) {
       servo_usleep(250);

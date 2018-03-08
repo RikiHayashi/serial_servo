@@ -35,7 +35,7 @@ int FutabaLeg::offset_load(char *filename){
 		std::cerr << "cannot open file" << filename << std::endl;
 		return -1;
 	}
-	while(fscanf(fp, "%d %d %s", &id, &angle, off_tmp) != EOF){
+	while(fscanf(fp, "%d %d", &id, &angle) != EOF){
 		offset[id] = angle * 0.01;
 	}
 	fclose(fp);
